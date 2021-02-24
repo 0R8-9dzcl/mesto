@@ -24,3 +24,8 @@
 **Figma**
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+
+
+## С работой можете охнакомится здесь
+
+* https://0r8-9dzcl.github.io/mesto/
