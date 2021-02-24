@@ -11,8 +11,10 @@
 
 @media screen and (max-width: 425px) {
     .footer__copy {
-        position: absolute;
-    font-size: 14px;
-    line-height: 17px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }
+
+/* спасибо что указали position не знаю как он сюда закрался, может из фигмы.
+не понимал почему не работает margin-bottom */
