@@ -34,3 +34,11 @@ formElement.addEventListener('submit', formSubmitHandler);
 likeButton.forEach((likeButton) => likeButton.addEventListener('click', function() {
     likeButton.classList.toggle('card__like_active');
 }));
+
+// for (let likeButtonActive of likeButton) {
+//     likeButtonActive.addEventListener('click', function() {
+//         likeButtonActive.classList.toggle('card__like_active');
+//     } )
+// }
+
+// Оба варианта рабочие
