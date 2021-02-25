@@ -1,6 +1,17 @@
 .card__caption {
-    margin: 26px 21px 24px 21px;
+    margin: 23px 21px 24px 21px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 198px;
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
