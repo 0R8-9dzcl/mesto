@@ -6,7 +6,10 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    border-bottom: 1px solid #545454b3;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    /* странно что цвет не совпадал, dev-tool в браузере сообщал другое
+    а в VC rgba(84, 84, 84, 0.702);
+    разница минимальна*/
 }
 
 @media screen and (max-width: 940px) {

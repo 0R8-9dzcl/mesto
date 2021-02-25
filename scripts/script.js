@@ -11,11 +11,11 @@ let likeButton = document.querySelectorAll('.card__like');
 function editButtonHandler() {
     profileNameInput.value = profileName.textContent;
     profileCaptionInput.value = profileCaption.textContent;
-    popupOpen.classList.toggle('popup_opened');
+    popupOpen.classList.add('popup_opened');
 }
 
 function closeButtonHandler() {
-    popupOpen.classList.toggle('popup_opened');
+    popupOpen.classList.remove('popup_opened');
 }
 
 function formSubmitHandler(evt) {
@@ -29,16 +29,3 @@ function formSubmitHandler(evt) {
 editButton.addEventListener('click', editButtonHandler);
 closeButton.addEventListener('click', closeButtonHandler);
 formElement.addEventListener('submit', formSubmitHandler);
-
-// Likes
-likeButton.forEach((likeButton) => likeButton.addEventListener('click', function() {
-    likeButton.classList.toggle('card__like_active');
-}));
-
-// for (let likeButtonActive of likeButton) {
-//     likeButtonActive.addEventListener('click', function() {
-//         likeButtonActive.classList.toggle('card__like_active');
-//     } )
-// }
-
-// Оба варианта рабочие

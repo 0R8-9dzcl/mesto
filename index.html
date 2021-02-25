@@ -6,7 +6,7 @@
     <meta name="author" content="Евгений Алексеев">
     <link rel="stylesheet" href="./pages/index.css" type="text/css">
     <link href="./images/favicon.png" rel="shortcut icon" type="image/x-icon">
-    <title>Mesto</title>
+    <title>Место</title>
 </head>
 <body class="page">
     <header class="header">
@@ -18,7 +18,7 @@
             <img class="profile__avatar" src="./images/image.jpg" alt="аватарка пользлвателя">
             <div class="profile__info">
                 <div class="profile__user">
-                        <h2 class="profile__name">Жак-Ив Кусто</h2>
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button  class="profile__edit-button" type="button"></button>
                     </div>
                     <p class="profile__caption">Исследователь океана</p>
@@ -27,48 +27,50 @@
             <button class="profile__add-button"  type="button"></button>
         </section>
         <section class="cards">
-            <div class="card">
-                <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
-                <div class="card__caption">
-                    <h3 class="card__title">Карачаевск</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
-                <div class="card__caption">
-                    <h3 class="card__title">Гора Эльбрус</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
-                <div class="card__caption">
-                    <h3 class="card__title">Домбай</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
-                <div class="card__caption">
-                    <h3 class="card__title">Гора Эльбрус</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
-                <div class="card__caption">
-                    <h3 class="card__title">Домбай</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
-                <div class="card__caption">
-                    <h3 class="card__title">Карачаево-Черкесская Республика</h3>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
+            <ul class="cards__list">
+                <li class="card">
+                    <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
+                    <div class="card__caption">
+                        <h2 class="card__title">Карачаевск</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+                <li class="card">
+                    <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
+                    <div class="card__caption">
+                        <h2 class="card__title">Гора Эльбрус</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+                <li class="card">
+                    <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
+                    <div class="card__caption">
+                        <h2 class="card__title">Домбай</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+                <li class="card">
+                    <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
+                    <div class="card__caption">
+                        <h2 class="card__title">Гора Эльбрус</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+                <li class="card">
+                    <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
+                    <div class="card__caption">
+                        <h2 class="card__title">Домбай</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+                <li class="card">
+                    <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
+                    <div class="card__caption">
+                        <h2 class="card__title">Карачаево-Черкесская Республика</h2>
+                        <button class="card__like" type="button"></button>
+                    </div>
+                </li>
+            </ul>
         </section>
     </main>
     <footer class="footer">
@@ -78,13 +80,11 @@
     <div class="popup">
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
-            <form class="popup__form">
-                <fieldset class="popup__fieldset">
-                    <legend class="popup__title">Редактировать профиль</legend>
-                    <input class="popup__input popup__input_name_name" name="name" type="text" placeholder="Имя пользователя" minlength="3" maxlength="60" id="name-input">
-                    <input class="popup__input popup__input_name_caption" name="caption" type="text" placeholder="О себе" minlength="3" maxlength="60" id="name-caption">
-                    <button class="popup__submit" type="submit" name="submit">Сохранить</button>
-                </fieldset>
+            <form class="popup__form" name="info">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__input popup__input_name_name" name="name" type="text" placeholder="Имя пользователя" minlength="3" maxlength="40" id="name-input">
+                <input class="popup__input popup__input_name_caption" name="caption" type="text" placeholder="О себе" minlength="3" maxlength="60" id="name-caption">
+                <button class="popup__submit" type="submit" name="submit">Сохранить</button>
             </form>
         </div>
     </div>
