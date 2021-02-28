@@ -3,7 +3,7 @@
     background-color: #ffffff;
     height: 20px;
     width: 21px;
-    background-image: url(../../../images/LikeHeart.svg);
+    background-image: url("../../../images/LikeHeart.svg");
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;

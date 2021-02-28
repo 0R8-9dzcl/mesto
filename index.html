@@ -29,6 +29,7 @@
         <section class="cards">
             <ul class="cards__list">
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
                     <div class="card__caption">
                         <h2 class="card__title">Карачаевск</h2>
@@ -36,6 +37,7 @@
                     </div>
                 </li>
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
                     <div class="card__caption">
                         <h2 class="card__title">Гора Эльбрус</h2>
@@ -43,6 +45,7 @@
                     </div>
                 </li>
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
                     <div class="card__caption">
                         <h2 class="card__title">Домбай</h2>
@@ -50,6 +53,7 @@
                     </div>
                 </li>
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Elbrus.png" alt="Гора Эльбрус на закате">
                     <div class="card__caption">
                         <h2 class="card__title">Гора Эльбрус</h2>
@@ -57,6 +61,7 @@
                     </div>
                 </li>
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Dombay.jpg" alt="Горы">
                     <div class="card__caption">
                         <h2 class="card__title">Домбай</h2>
@@ -64,6 +69,7 @@
                     </div>
                 </li>
                 <li class="card">
+                    <button class="card__delete" type="button"></button>
                     <img class="card__photo" src="./images/Karachayevsk.jpg" alt="Руины Сентинского храма в горах">
                     <div class="card__caption">
                         <h2 class="card__title">Карачаево-Черкесская Республика</h2>
@@ -77,15 +83,33 @@
         <p class="footer__copy">&copy; 2021 Mesto Russia</p>
     </footer>
     <!-- pop-up -->
-    <div class="popup">
+    <div class="popup popup__edit-profile">
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
-            <form class="popup__form" name="info">
+            <form class="popup__form" name="editProfile">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__input popup__input_name_name" name="name" type="text" placeholder="Имя пользователя" minlength="3" maxlength="40" id="name-input">
                 <input class="popup__input popup__input_name_caption" name="caption" type="text" placeholder="О себе" minlength="3" maxlength="60" id="name-caption">
                 <button class="popup__submit" type="submit" name="submit">Сохранить</button>
             </form>
+        </div>
+    </div>
+    <div class="popup popup__add-card">
+        <div class="popup__container">
+            <button class="popup__close-button popup__close-button_type_add" type="button"></button>
+            <form class="popup__form" name="addCard">
+                <h2 class="popup__title">Новое место</h2>
+                <input class="popup__input popup__input_name_place" name="place" type="text" placeholder="Название" minlength="3" maxlength="40" id="name-place">
+                <input class="popup__input popup__input_name_source" name="source" type="url" placeholder="Ссылка на картинку" minlength="3" maxlength="60" id="name-source">
+                <button class="popup__submit" type="submit" name="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup__photo popup popup_opened">
+        <div class="popup__photo-box">
+            <button class="popup__close-button popup__close-button_image" type="button"></button>
+            <img class="popup__img" src="./images/photo-1559426756-14c161f0dae8 1.png" alt="">
+            <p class="popup__img-caption">Горный Алтай</p>
         </div>
     </div>
     <script src="./scripts/script.js"></script>
