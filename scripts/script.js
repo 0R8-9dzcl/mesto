@@ -1,3 +1,4 @@
+// общие функции
 function popupOpen(popupElement) {
     popupElement.classList.add('popup_opened');
 }
@@ -6,7 +7,7 @@ function closeButtonHandler() {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
 }
 
-// Popup Edit
+// Popup Edit ------------------------------------------------------------------
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup__edit-profile');
 const closeButtonEdit = document.querySelector('.popup__close-button_action_edit');
@@ -34,17 +35,11 @@ editButton.addEventListener('click', editButtonHandler);
 closeButtonEdit.addEventListener('click', closeButtonHandler);
 formEdit.addEventListener('submit', editSubmitHandler);
 
-// Popup Add
+// Popup Add ------------------------------------------------------------------------
 const addButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup__add-card');
 const closeButtonAdd = document.querySelector('.popup__close-button_action_add');
 const formAdd = document.querySelector('.popup__form_action_add');
-
-
-
-// шпионы
-addButton.addEventListener('click', () => popupOpen(popupAddCard));
-closeButtonAdd.addEventListener('click', closeButtonHandler);
 
 // выбор шаблона
 const photoContainer = document.querySelector('.cards__list');
@@ -54,11 +49,11 @@ const cardSourceInput = document.querySelector('.popup__input_name_source');
 
 const initialCards = [
     {
-      name: 'Архыз',
+        name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
-      name: 'Челябинская область',
+        name: 'Челябинская область',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
@@ -66,48 +61,54 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     },
     {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
 
 function deleteCardHandler(evt) {
-	const target = evt.target;
-	const currentCard = target.closest('.card');
-
+    const target = evt.target;
+	const currentCard = target.closest('.card');  
 	currentCard.remove();
 }
 
+function likeCardHandler(evt) {
+    const target = evt.target;
+    target.classList.toggle('card__like_active');
+}
+
 function createDomNode(item) {
-	const newCard = templateCard.querySelector('.card').cloneNode(true);
+    const newCard = templateCard.querySelector('.card').cloneNode(true);
     const cardTitle = newCard.querySelector('.card__title');
     const cardPhoto = newCard.querySelector('.card__photo');
     const trashButton = newCard.querySelector('.card__delete');
+    const like = newCard.querySelector('.card__like');
 
 	cardTitle.textContent = item.name;
 	cardPhoto.src = item.link;
 	cardPhoto.alt = item.name;
+// шпионы
     trashButton.addEventListener('click', deleteCardHandler);
+    like.addEventListener('click', likeCardHandler);
+
 	return newCard;
 }
 
 function renderList() {
-	const result = initialCards.map(item => {
-		const newCard = createDomNode(item);
+    const result = initialCards.map(item => {
+        const newCard = createDomNode(item);
 		return newCard;
 	});
 	photoContainer.append(...result);
 }
-
-renderList()
 
 function addCardHandler(evt) {
     evt.preventDefault();
@@ -117,5 +118,10 @@ function addCardHandler(evt) {
     cardTitleInput.value ='';
     cardSourceInput.value ='';
 }
-  
+
+renderList()
+
+// шпионы
+addButton.addEventListener('click', () => popupOpen(popupAddCard));
+closeButtonAdd.addEventListener('click', closeButtonHandler);
 formAdd.addEventListener('submit', addCardHandler);
