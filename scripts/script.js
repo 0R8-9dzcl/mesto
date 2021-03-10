@@ -77,18 +77,25 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ];
+];
 
+function deleteCardHandler(evt) {
+	const target = evt.target;
+	const currentCard = target.closest('.card');
+
+	currentCard.remove();
+}
 
 function createDomNode(item) {
 	const newCard = templateCard.querySelector('.card').cloneNode(true);
     const cardTitle = newCard.querySelector('.card__title');
     const cardPhoto = newCard.querySelector('.card__photo');
-    
+    const trashButton = newCard.querySelector('.card__delete');
+
 	cardTitle.textContent = item.name;
 	cardPhoto.src = item.link;
 	cardPhoto.alt = item.name;
-
+    trashButton.addEventListener('click', deleteCardHandler);
 	return newCard;
 }
 
