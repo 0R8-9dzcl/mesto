@@ -37,7 +37,7 @@
     <div class="popup popup__edit-profile">
         <div class="popup__container">
             <button class="popup__close-button popup__close-button_action_edit" type="button"></button>
-            <form class="popup__form" name="editProfile">
+            <form class="popup__form popup__form_action_edit" name="editProfile">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__input popup__input_name_name" name="name" type="text" placeholder="Имя пользователя" minlength="3" maxlength="40" id="name-input">
                 <input class="popup__input popup__input_name_caption" name="caption" type="text" placeholder="О себе" minlength="3" maxlength="60" id="name-caption">
@@ -48,7 +48,7 @@
     <div class="popup popup__add-card">
         <div class="popup__container">
             <button class="popup__close-button popup__close-button_action_add" type="button"></button>
-            <form class="popup__form" name="addCard">
+            <form class="popup__form popup__form_action_add" name="addCard">
                 <h2 class="popup__title">Новое место</h2>
                 <input class="popup__input popup__input_name_place" name="place" type="text" placeholder="Название" minlength="3" maxlength="40" id="name-place">
                 <input class="popup__input popup__input_name_source" name="source" type="url" placeholder="Ссылка на картинку" minlength="3" maxlength="60" id="name-source">
@@ -56,7 +56,13 @@
             </form>
         </div>
     </div>
-    <div class="popup__photo popup"></div>
+    <div class="popup__photo popup">
+        <div class="popup__photo-box">
+            <button class="popup__close-button popup__close-button_action_image" type="button"></button>
+            <img class="popup__img" src="#" alt="">
+            <p class="popup__img-caption"></p>
+        </div>
+    </div>
     <template class="template-card">
         <li class="card">
             <button class="card__delete" type="button"></button>
@@ -66,13 +72,6 @@
                 <button class="card__like" type="button"></button>
             </div>
         </li>
-    </template>
-    <template class="template-photo">
-        <div class="popup__photo-box">
-            <button class="popup__close-button popup__close-button_action_image" type="button"></button>
-            <img class="popup__img" src="#" alt="">
-            <p class="popup__img-caption"></p>
-        </div>
     </template>
     <script src="./scripts/script.js"></script>
 </body>
