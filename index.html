@@ -56,7 +56,13 @@
             </form>
         </div>
     </div>
-    <div class="popup__photo popup"></div>
+    <div class="popup__photo popup">
+        <div class="popup__photo-box">
+            <button class="popup__close-button popup__close-button_action_image" type="button"></button>
+            <img class="popup__img" src="#" alt="">
+            <p class="popup__img-caption"></p>
+        </div>
+    </div>
     <template class="template-card">
         <li class="card">
             <button class="card__delete" type="button"></button>
@@ -66,13 +72,6 @@
                 <button class="card__like" type="button"></button>
             </div>
         </li>
-    </template>
-    <template class="template-photo">
-        <div class="popup__photo-box">
-            <button class="popup__close-button popup__close-button_action_image" type="button"></button>
-            <img class="popup__img" src="#" alt="">
-            <p class="popup__img-caption"></p>
-        </div>
     </template>
     <script src="./scripts/script.js"></script>
 </body>

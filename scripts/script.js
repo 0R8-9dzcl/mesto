@@ -99,6 +99,7 @@ function createDomNode(item) {
     trashButton.addEventListener('click', deleteCardHandler);
     like.addEventListener('click', likeCardHandler);
 
+    openPhoto(cardPhoto);
 	return newCard;
 }
 
@@ -125,3 +126,23 @@ renderList()
 addButton.addEventListener('click', () => popupOpen(popupAddCard));
 closeButtonAdd.addEventListener('click', closeButtonHandler);
 formAdd.addEventListener('submit', addCardHandler);
+
+// Popup Photo ---------------------------------------------------------------------
+const popupPhoto = document.querySelector('.popup__photo');
+const closeButtonPhoto = document.querySelector('.popup__close-button_action_image');
+
+function openPhoto(img) {
+    img.addEventListener('click', () => {
+        const popupImg = document.querySelector('.popup__img');
+        const popupImgCaption = document.querySelector('.popup__img-caption');
+        
+        popupImg.src = img.src;
+        popupImg.alt = img.alt;
+        popupImgCaption.textContent = img.alt; /*по логике нужно использовать
+        cardTitle, но так проще, да значения у них одинаковые */
+
+        popupOpen(popupPhoto);
+    });
+}
+
+closeButtonPhoto.addEventListener('click', closeButtonHandler);
