@@ -1,10 +1,10 @@
 // общие функции
-function popupOpen(popupElement) {
+function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
 }
 
-function closeButtonHandler() {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
+function closeButtonHandler(popupElement) {
+    popupElement.classList.remove('popup_opened');
 }
 
 // Popup Edit ------------------------------------------------------------------
@@ -20,19 +20,19 @@ const profileCaptionInput = document.querySelector('.popup__input_name_caption')
 function editButtonHandler() {
     profileNameInput.value = profileName.textContent;
     profileCaptionInput.value = profileCaption.textContent;
-    popupOpen(popupEditProfile);
+    openPopup(popupEditProfile);
 }    
 
 function editSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = profileNameInput.value;
     profileCaption.textContent = profileCaptionInput.value;
-    closeButtonHandler();
+    closeButtonHandler(popupEditProfile);
 }
 
 // шпионы
 editButton.addEventListener('click', editButtonHandler);
-closeButtonEdit.addEventListener('click', closeButtonHandler);
+closeButtonEdit.addEventListener('click',() => closeButtonHandler(popupEditProfile));
 formEdit.addEventListener('submit', editSubmitHandler);
 
 // Popup Add ------------------------------------------------------------------------
@@ -75,14 +75,11 @@ const initialCards = [
 ];
 
 function deleteCardHandler(evt) {
-    const target = evt.target;
-	const currentCard = target.closest('.card');  
-	currentCard.remove();
+    evt.target.closest('.card').remove();
 }
 
 function likeCardHandler(evt) {
-    const target = evt.target;
-    target.classList.toggle('card__like_active');
+    evt.target.classList.toggle('card__like_active');
 }
 
 function createDomNode(item) {
@@ -92,15 +89,15 @@ function createDomNode(item) {
     const trashButton = newCard.querySelector('.card__delete');
     const like = newCard.querySelector('.card__like');
 
-	cardTitle.textContent = item.name;
-	cardPhoto.src = item.link;
-	cardPhoto.alt = item.name;
-// шпионы
+    cardTitle.textContent = item.name;
+    cardPhoto.src = item.link;
+    cardPhoto.alt = item.name;
+    // шпионы
     trashButton.addEventListener('click', deleteCardHandler);
     like.addEventListener('click', likeCardHandler);
 
-    openPhoto(cardPhoto);
-	return newCard;
+    cardPhoto.addEventListener('click', () => handleCardClick(item.link, item.name));
+    return newCard;
 }
 
 function renderList() {
@@ -115,7 +112,7 @@ function addCardHandler(evt) {
     evt.preventDefault();
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
-    closeButtonHandler();
+    closeButtonHandler(popupEditProfile);
     cardTitleInput.value ='';
     cardSourceInput.value ='';
 }
@@ -123,26 +120,21 @@ function addCardHandler(evt) {
 renderList()
 
 // шпионы
-addButton.addEventListener('click', () => popupOpen(popupAddCard));
-closeButtonAdd.addEventListener('click', closeButtonHandler);
+addButton.addEventListener('click', () => openPopup(popupAddCard));
+closeButtonAdd.addEventListener('click',() => closeButtonHandler(popupAddCard));
 formAdd.addEventListener('submit', addCardHandler);
 
 // Popup Photo ---------------------------------------------------------------------
 const popupPhoto = document.querySelector('.popup_photo');
 const closeButtonPhoto = document.querySelector('.popup__close-button_action_image');
 
-function openPhoto(img) {
-    img.addEventListener('click', () => {
-        const popupImg = document.querySelector('.popup__img');
-        const popupImgCaption = document.querySelector('.popup__img-caption');
-        
-        popupImg.src = img.src;
-        popupImg.alt = img.alt;
-        popupImgCaption.textContent = img.alt; /*по логике нужно использовать
-        cardTitle, но так проще, да значения у них одинаковые */
-
-        popupOpen(popupPhoto);
-    });
+function handleCardClick(link, title) {
+    const popupImg = document.querySelector('.popup__img');
+    const popupImgCaption = document.querySelector('.popup__img-caption');
+    popupImg.src = link; 
+    popupImg.alt = title; 
+    popupImgCaption.textContent = title;
+    openPopup(popupPhoto);
 }
 
-closeButtonPhoto.addEventListener('click', closeButtonHandler);
+closeButtonPhoto.addEventListener('click',() => closeButtonHandler(popupPhoto));
