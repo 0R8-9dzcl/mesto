@@ -9,7 +9,7 @@ function closeButtonHandler() {
 
 // Popup Edit ------------------------------------------------------------------
 const editButton = document.querySelector('.profile__edit-button');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
 const closeButtonEdit = document.querySelector('.popup__close-button_action_edit');
 const formEdit = document.querySelector('.popup__form_action_edit');
 const profileName = document.querySelector('.profile__name');
@@ -37,7 +37,7 @@ formEdit.addEventListener('submit', editSubmitHandler);
 
 // Popup Add ------------------------------------------------------------------------
 const addButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup__add-card');
+const popupAddCard = document.querySelector('.popup_add-card');
 const closeButtonAdd = document.querySelector('.popup__close-button_action_add');
 const formAdd = document.querySelector('.popup__form_action_add');
 
@@ -128,7 +128,7 @@ closeButtonAdd.addEventListener('click', closeButtonHandler);
 formAdd.addEventListener('submit', addCardHandler);
 
 // Popup Photo ---------------------------------------------------------------------
-const popupPhoto = document.querySelector('.popup__photo');
+const popupPhoto = document.querySelector('.popup_photo');
 const closeButtonPhoto = document.querySelector('.popup__close-button_action_image');
 
 function openPhoto(img) {
