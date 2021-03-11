@@ -127,10 +127,10 @@ formAdd.addEventListener('submit', addCardHandler);
 // Popup Photo ---------------------------------------------------------------------
 const popupPhoto = document.querySelector('.popup_photo');
 const closeButtonPhoto = document.querySelector('.popup__close-button_action_image');
+const popupImg = document.querySelector('.popup__img');
+const popupImgCaption = document.querySelector('.popup__img-caption');
 
 function handleCardClick(link, title) {
-    const popupImg = document.querySelector('.popup__img');
-    const popupImgCaption = document.querySelector('.popup__img-caption');
     popupImg.src = link; 
     popupImg.alt = title; 
     popupImgCaption.textContent = title;
