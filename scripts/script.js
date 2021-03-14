@@ -1,7 +1,5 @@
 // общие функции
-function openPopup(popupElement) {
-    popupElement.classList.add('popup_opened');
-}
+const openPopup = popupElement => popupElement.classList.add('popup_opened');
 
 function closeButtonHandler(popupElement) {
     popupElement.classList.remove('popup_opened');
@@ -112,7 +110,7 @@ function addCardHandler(evt) {
     evt.preventDefault();
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
-    closeButtonHandler(popupEditProfile);
+    closeButtonHandler(popupAddCard);
     cardTitleInput.value ='';
     cardSourceInput.value ='';
 }
