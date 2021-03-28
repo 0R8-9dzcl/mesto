@@ -1,7 +1,30 @@
 // общие функции
-const openPopup = popupElement => popupElement.classList.add('popup_opened');
+const handleEscapeButton = (evt, popupElement) => {
+    if (evt.key === 'Escape') {
+        closeButtonHandler(popupElement);
+    }
+}
 
-const closeButtonHandler = popupElement => popupElement.classList.remove('popup_opened');
+const handleClickOverlay = (evt, popupElement) => {
+    evt.stopPropagation();
+    if (evt.target === popupElement) {
+        closeButtonHandler(popupElement);
+    }
+    
+}
+
+
+const openPopup = popupElement => {
+    popupElement.classList.add('popup_opened');
+    document.addEventListener('keydown', evt => handleEscapeButton(evt, popupElement));
+    popupElement.addEventListener('click', evt => handleClickOverlay(evt, popupElement));
+};
+
+const closeButtonHandler = popupElement => {
+    popupElement.classList.remove('popup_opened');
+    document.removeEventListener('keydown', evt => handleEscapeButton(evt, popupElement));
+    popupElement.removeEventListener('click', evt => handleClickOverlay(evt, popupElement));
+};
 
 // Popup Edit ------------------------------------------------------------------
 const editButton = document.querySelector('.profile__edit-button');

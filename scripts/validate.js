@@ -65,4 +65,4 @@ const enableValidation = () => {
     );
 };
 
-enableValidation();
+enableValidation(validateConfig);
