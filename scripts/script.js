@@ -111,8 +111,7 @@ function addCardHandler(evt) {
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
     closeButtonHandler(popupAddCard);
-    cardTitleInput.value ='';
-    cardSourceInput.value ='';
+    formAdd.reset();
 }
 
 renderList()

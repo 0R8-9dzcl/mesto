@@ -15,9 +15,9 @@
     <main>
         <section class="profile">
             <div class="profile__container">
-            <img class="profile__avatar" src="./images/image.jpg" alt="аватарка пользлвателя">
-            <div class="profile__info">
-                <div class="profile__user">
+                <img class="profile__avatar" src="./images/image.jpg" alt="аватарка пользлвателя">
+                <div class="profile__info">
+                    <div class="profile__user">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button  class="profile__edit-button" type="button"></button>
                     </div>
@@ -37,10 +37,12 @@
     <div class="popup popup_edit-profile">
         <div class="popup__container">
             <button class="popup__close-button popup__close-button_action_edit" type="button"></button>
-            <form class="popup__form popup__form_action_edit" name="editProfile">
+            <form class="popup__form popup__form_action_edit" name="editProfile" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input_name_name" name="name" type="text" placeholder="Имя пользователя" minlength="3" maxlength="40" id="name-input" required>
-                <input class="popup__input popup__input_name_caption" name="caption" type="text" placeholder="О себе" minlength="3" maxlength="60" id="name-caption" required>
+                <input class="popup__input popup__input_name_name" id="name-input" value=" " name="name" type="text" placeholder="Имя пользователя" minlength="2" maxlength="40" id="name-input" required>
+                <span class="popup__error" id="name-input-error"></span>
+                <input class="popup__input popup__input_name_caption" id="caption-input" value=" " name="caption" type="text" placeholder="О себе" minlength="2" maxlength="200" id="name-caption" required>
+                <span class="popup__error" id="caption-input-error"></span>
                 <button class="popup__submit" type="submit" name="submit">Сохранить</button>
             </form>
         </div>
@@ -48,11 +50,13 @@
     <div class="popup popup_add-card">
         <div class="popup__container">
             <button class="popup__close-button popup__close-button_action_add" type="button"></button>
-            <form class="popup__form popup__form_action_add" name="addCard">
+            <form class="popup__form popup__form_action_add" name="addCard" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input popup__input_name_place" name="place" type="text" placeholder="Название" minlength="3" maxlength="40" id="name-place" required>
-                <input class="popup__input popup__input_name_source" name="source" type="url" placeholder="Ссылка на картинку" minlength="3" maxlength="200" id="name-source" required>
-                <button class="popup__submit" type="submit" name="submit">Сохранить</button>
+                <input class="popup__input popup__input_name_place" id="place-input" name="place" type="text" placeholder="Название" minlength="2" maxlength="30" id="name-place" required>
+                <span class="popup__error" id="place-input-error"></span>
+                <input class="popup__input popup__input_name_source" id="source-input" name="source" type="url" placeholder="Ссылка на картинку" id="name-source" required>
+                <span class="popup__error" id="source-input-error"></span>
+                <button class="popup__submit" type="submit" name="submit">Создать</button>
             </form>
         </div>
     </div>
@@ -74,5 +78,6 @@
         </li>
     </template>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 </html>
