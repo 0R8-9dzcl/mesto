@@ -1,30 +1,31 @@
 // общие функции
-const handleEscapeButton = (evt, popupElement) => {
+const handleEscapeButton = (evt) => {
+    const popup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
-        closeButtonHandler(popupElement);
+        closePopup(popup);
     }
-}
+};
 
-const handleClickOverlay = (evt, popupElement) => {
-    evt.stopPropagation();
-    if (evt.target === popupElement) {
-        closeButtonHandler(popupElement);
+const handleClickOverlay = (evt) => {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
     }
-    
-}
+};
 
 
 const openPopup = popupElement => {
+    clearValidation(validateConfig);
     popupElement.classList.add('popup_opened');
-    document.addEventListener('keydown', evt => handleEscapeButton(evt, popupElement));
-    popupElement.addEventListener('click', evt => handleClickOverlay(evt, popupElement));
+    document.addEventListener('keydown', handleEscapeButton);
 };
 
-const closeButtonHandler = popupElement => {
+const closePopup = popupElement => {
+    formAdd.reset();
     popupElement.classList.remove('popup_opened');
-    document.removeEventListener('keydown', evt => handleEscapeButton(evt, popupElement));
-    popupElement.removeEventListener('click', evt => handleClickOverlay(evt, popupElement));
+    document.removeEventListener('keydown', handleEscapeButton);
 };
+
+document.addEventListener('click', handleClickOverlay);
 
 // Popup Edit ------------------------------------------------------------------
 const editButton = document.querySelector('.profile__edit-button');
@@ -46,12 +47,12 @@ const editSubmitHandler = evt => {
     evt.preventDefault();
     profileName.textContent = profileNameInput.value;
     profileCaption.textContent = profileCaptionInput.value;
-    closeButtonHandler(popupEditProfile);
+    closePopup(popupEditProfile);
 };
 
 // шпионы
 editButton.addEventListener('click', editButtonHandler);
-closeButtonEdit.addEventListener('click',() => closeButtonHandler(popupEditProfile));
+closeButtonEdit.addEventListener('click',() => closePopup(popupEditProfile));
 formEdit.addEventListener('submit', editSubmitHandler);
 
 // Popup Add ------------------------------------------------------------------------
@@ -100,15 +101,14 @@ const addCardHandler = evt => {
     evt.preventDefault();
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
-    closeButtonHandler(popupAddCard);
-    formAdd.reset();
+    closePopup(popupAddCard);
 };
 
 renderList()
 
 // шпионы
 addButton.addEventListener('click', () => openPopup(popupAddCard));
-closeButtonAdd.addEventListener('click',() => closeButtonHandler(popupAddCard));
+closeButtonAdd.addEventListener('click',() => closePopup(popupAddCard));
 formAdd.addEventListener('submit', addCardHandler);
 
 // Popup Photo ---------------------------------------------------------------------
@@ -124,4 +124,4 @@ const handleCardClick = (link, title) => {
     openPopup(popupPhoto);
 };
 
-closeButtonPhoto.addEventListener('click',() => closeButtonHandler(popupPhoto));
+closeButtonPhoto.addEventListener('click',() => closePopup(popupPhoto));
