@@ -1,7 +1,7 @@
 // общие функции
 const handleEscapeButton = (evt) => {
-    const popup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
+        const popup = document.querySelector('.popup_opened');
         closePopup(popup);
     }
 };
@@ -14,13 +14,11 @@ const handleClickOverlay = (evt) => {
 
 
 const openPopup = popupElement => {
-    clearValidation(validateConfig);
     popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscapeButton);
 };
 
 const closePopup = popupElement => {
-    formAdd.reset();
     popupElement.classList.remove('popup_opened');
     document.removeEventListener('keydown', handleEscapeButton);
 };
@@ -45,6 +43,7 @@ const editButtonHandler =() => {
 
 const editSubmitHandler = evt => {
     evt.preventDefault();
+    clearValidation(validateConfig);
     profileName.textContent = profileNameInput.value;
     profileCaption.textContent = profileCaptionInput.value;
     closePopup(popupEditProfile);
@@ -99,6 +98,8 @@ const renderList = () => {
 
 const addCardHandler = evt => {
     evt.preventDefault();
+    clearValidation(validateConfig);
+    formAdd.reset();
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
     closePopup(popupAddCard);
