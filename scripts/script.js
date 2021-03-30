@@ -43,14 +43,16 @@ const editButtonHandler =() => {
 
 const editSubmitHandler = evt => {
     evt.preventDefault();
-    clearValidation(validateConfig);
     profileName.textContent = profileNameInput.value;
     profileCaption.textContent = profileCaptionInput.value;
     closePopup(popupEditProfile);
 };
 
 // шпионы
-editButton.addEventListener('click', editButtonHandler);
+editButton.addEventListener('click', () => {
+    editButtonHandler();
+    clearValidation(validateConfig);
+});
 closeButtonEdit.addEventListener('click',() => closePopup(popupEditProfile));
 formEdit.addEventListener('submit', editSubmitHandler);
 
@@ -98,8 +100,6 @@ const renderList = () => {
 
 const addCardHandler = evt => {
     evt.preventDefault();
-    clearValidation(validateConfig);
-    formAdd.reset();
     const card = createDomNode({name: cardTitleInput.value, link: cardSourceInput.value});
     photoContainer.prepend(card);
     closePopup(popupAddCard);
@@ -108,7 +108,11 @@ const addCardHandler = evt => {
 renderList()
 
 // шпионы
-addButton.addEventListener('click', () => openPopup(popupAddCard));
+addButton.addEventListener('click', () => {
+    clearValidation(validateConfig);
+    formAdd.reset();
+    openPopup(popupAddCard)
+});
 closeButtonAdd.addEventListener('click',() => closePopup(popupAddCard));
 formAdd.addEventListener('submit', addCardHandler);
 
