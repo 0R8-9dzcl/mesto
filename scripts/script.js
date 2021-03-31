@@ -109,8 +109,8 @@ renderList()
 
 // шпионы
 addButton.addEventListener('click', () => {
-    clearValidation(validateConfig);
     formAdd.reset();
+    clearValidation(validateConfig);
     openPopup(popupAddCard)
 });
 closeButtonAdd.addEventListener('click',() => closePopup(popupAddCard));
