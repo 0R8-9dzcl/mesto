@@ -1,6 +1,5 @@
 // Параметры валидации
 const validateConfig = {
-    // formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__submit',
     submitButtonInactive: 'popup__submit_disable',
@@ -12,7 +11,6 @@ const validateConfig = {
 const popupEditConfig = {
     editButton: document.querySelector('.profile__edit-button'),
     popupEditProfile: document.querySelector('.popup_edit-profile'),
-    closeButtonEdit: document.querySelector('.popup__close-button_action_edit'),
     formEdit: document.querySelector('.popup__form_action_edit'),
     profileName: document.querySelector('.profile__name'),
     profileNameInput: document.querySelector('.popup__input_name_name'),
@@ -26,7 +24,6 @@ const addCardConfig = {
     popupAddCard: document.querySelector('.popup_add-card'),
     formAdd: document.querySelector('.popup__form_action_add'),
     photoContainer: document.querySelector('.cards__list'),
-    closeButtonAdd: document.querySelector('.popup__close-button_action_add'),
     cardTitleInput: document.querySelector('.popup__input_name_place'),
     cardSourceInput: document.querySelector('.popup__input_name_source')
 };
@@ -44,7 +41,6 @@ const сardSetting = {
 const popupImgSetting = {
     popupImg: document.querySelector('.popup__img'),
     popupPhoto: document.querySelector('.popup_photo'),
-    closeButtonPhoto: document.querySelector('.popup__close-button_action_image'),
     popupImgCaption: document.querySelector('.popup__img-caption')
 };
 

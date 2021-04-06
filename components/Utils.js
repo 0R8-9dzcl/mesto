@@ -1,13 +1,21 @@
+const clickPopupListener = () => {
+    const popups = document.querySelectorAll('.popup'); 
+    popups.forEach((popup) => {
+        popup.addEventListener('click', (evt) => {
+            if (evt.target.classList.contains('popup_opened')) {
+                closePopup(popup);
+            }
+            if (evt.target.classList.contains('popup__close-button')) {
+            closePopup(popup);
+            }
+        })
+    })
+};
+
 const handleEscapeButton = (evt) => {
     if (evt.key === 'Escape') {
         const popup = document.querySelector('.popup_opened');
         closePopup(popup);
-    }
-};
-
-const handleClickOverlay = (evt) => {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
     }
 };
 
@@ -22,4 +30,4 @@ const closePopup = popupElement => {
     document.removeEventListener('keydown', handleEscapeButton);
 };
 
-export { handleClickOverlay, openPopup, closePopup };
+export { clickPopupListener, openPopup, closePopup };

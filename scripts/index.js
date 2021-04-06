@@ -1,12 +1,12 @@
 import FormValidator from '../components/FormValidator.js'
-import { validateConfig, popupEditConfig, addCardConfig } from '../components/config.js';
+import { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting } from '../components/config.js';
 
 import Card from '../components/Card.js';
 import { initialCards } from '../components/initial-cards.js';
-import { handleClickOverlay, openPopup, closePopup } from '../components/Utils.js';
+import { clickPopupListener, openPopup, closePopup } from '../components/utils.js';
 
 
-document.addEventListener('click', handleClickOverlay);
+clickPopupListener();
 
 // Popup Edit ------------------------------------------------------------------
 
@@ -23,36 +23,56 @@ const editSubmitHandler = evt => {
     popupEditConfig.profileCaption.textContent = popupEditConfig.profileCaptionInput.value;
     closePopup(popupEditConfig.popupEditProfile);
 };
+//валидация
+const formEditValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
+formEditValidator.clearValidation();
+formEditValidator.enableValidation();
 
 // шпионы
 popupEditConfig.editButton.addEventListener('click', () => {
     editButtonHandler();
-    const formValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
-    formValidator.clearValidation();
-    formValidator.enableValidation();
 });
-popupEditConfig.closeButtonEdit.addEventListener('click',() => closePopup(popupEditConfig.popupEditProfile));
 popupEditConfig.formEdit.addEventListener('submit', editSubmitHandler);
 
 // Popup Add -----------------------------------------------------------------------
+// открытие попапа картинки
+const handleCardClick = (name, link) => {
+    popupImgSetting.popupImg.src = link; 
+    popupImgSetting.popupImg.alt = name; 
+    popupImgSetting.popupImgCaption.textContent = name;
+    openPopup(popupImgSetting.popupPhoto);
+};
+
+const createCard  = (item, toEnd) => {
+    const card = new Card(item, handleCardClick, сardSetting, '.template-card');
+    const cardElement = card.generateCard();
+    const method = toEnd ? 'append' : 'prepend';
+    addCardConfig.photoContainer[method](cardElement);
+};
+
 //  Отрисовка карточек
 const renderList = () =>{
     initialCards.forEach(item => {
-        const card = new Card(item, '.template-card');
-        const cardElement = card.generateCard();
-        addCardConfig.photoContainer.append(cardElement);
+        createCard(item, true);
     });
 };
 
-renderList()
+renderList();
 // создание новой карточки
 const addCardSubmit = evt => {
     evt.preventDefault();
-    const card = new Card({name: addCardConfig.cardTitleInput.value, link: addCardConfig.cardSourceInput.value}, '.template-card');
-    const cardElement = card.generateCard();
-    addCardConfig.photoContainer.prepend(cardElement);
+    createCard({
+        name: addCardConfig.cardTitleInput.value,
+        link: addCardConfig.cardSourceInput.value
+    });
     closePopup(addCardConfig.popupAddCard);
 };
+
+// валидация
+
+const formCardValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
+formCardValidator.clearValidation();
+formCardValidator.enableValidation();
 
 // // шпионы
 addCardConfig.addButton.addEventListener('click', () => {
@@ -62,5 +82,5 @@ addCardConfig.addButton.addEventListener('click', () => {
     formValidator.enableValidation();
     openPopup(addCardConfig.popupAddCard)
 });
-addCardConfig.closeButtonAdd.addEventListener('click',() => closePopup(addCardConfig.popupAddCard));
 addCardConfig.formAdd.addEventListener('submit', addCardSubmit);
+
