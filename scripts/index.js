@@ -43,21 +43,22 @@ const handleCardClick = (name, link) => {
     openPopup(popupImgSetting.popupPhoto);
 };
 
-const addCard = (cardElement, toEnd) => {
+const createCard  = (item) => {
+    const card = new Card(item, handleCardClick, сardSetting, '.template-card');
+    const cardElement = card.generateCard();
+    return cardElement;
+};
+
+const addCard = (item, toEnd) => {
+    const cardElement = createCard(item);
     const method = toEnd ? 'append' : 'prepend';
     addCardConfig.photoContainer[method](cardElement);
 }
 
-const createCard  = (item, toEnd) => {
-    const card = new Card(item, handleCardClick, сardSetting, '.template-card');
-    const cardElement = card.generateCard();
-    addCard(cardElement, toEnd);
-};
-
 //  Отрисовка карточек
 const renderList = () =>{
     initialCards.forEach(item => {
-        createCard(item, true);
+        addCard(item, true);
     });
 };
 
