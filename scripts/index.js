@@ -66,7 +66,7 @@ renderList();
 // создание новой карточки
 const addCardSubmit = evt => {
     evt.preventDefault();
-    createCard({
+    addCard({
         name: addCardConfig.cardTitleInput.value,
         link: addCardConfig.cardSourceInput.value
     });
