@@ -10,10 +10,14 @@ clickPopupListener();
 
 // Popup Edit ------------------------------------------------------------------
 
+//валидация
+const formEditValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
+formEditValidator.enableValidation();
 
 const editButtonHandler =() => {
     popupEditConfig.profileNameInput.value = popupEditConfig.profileName.textContent;
     popupEditConfig.profileCaptionInput.value = popupEditConfig.profileCaption.textContent;
+    formEditValidator.clearValidation();
     openPopup(popupEditConfig.popupEditProfile);
 };
 
@@ -23,10 +27,6 @@ const editSubmitHandler = evt => {
     popupEditConfig.profileCaption.textContent = popupEditConfig.profileCaptionInput.value;
     closePopup(popupEditConfig.popupEditProfile);
 };
-//валидация
-const formEditValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
-formEditValidator.clearValidation();
-formEditValidator.enableValidation();
 
 // шпионы
 popupEditConfig.editButton.addEventListener('click', () => {
@@ -43,11 +43,15 @@ const handleCardClick = (name, link) => {
     openPopup(popupImgSetting.popupPhoto);
 };
 
+const addCard = (cardElement, toEnd) => {
+    const method = toEnd ? 'append' : 'prepend';
+    addCardConfig.photoContainer[method](cardElement);
+}
+
 const createCard  = (item, toEnd) => {
     const card = new Card(item, handleCardClick, сardSetting, '.template-card');
     const cardElement = card.generateCard();
-    const method = toEnd ? 'append' : 'prepend';
-    addCardConfig.photoContainer[method](cardElement);
+    addCard(cardElement, toEnd);
 };
 
 //  Отрисовка карточек
@@ -71,16 +75,14 @@ const addCardSubmit = evt => {
 // валидация
 
 const formCardValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
-formCardValidator.clearValidation();
 formCardValidator.enableValidation();
 
 // // шпионы
 addCardConfig.addButton.addEventListener('click', () => {
     addCardConfig.formAdd.reset();
-    const formValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
-    formValidator.clearValidation();
-    formValidator.enableValidation();
+    // часть кода в прощлый раз я забыл удалить, но здесь прошу обратить внимание на то,
+    // что этот метод удаляет ошибки
+    formCardValidator.clearValidation();
     openPopup(addCardConfig.popupAddCard)
 });
 addCardConfig.formAdd.addEventListener('submit', addCardSubmit);
-

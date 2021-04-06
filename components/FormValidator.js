@@ -8,7 +8,6 @@ export default class FormValidator {
         this._errorClass = validateConfig.errorClass;
     }
     _hasInvalidInput = () => this._inputList.some(inputElement => !inputElement.validity.valid);
-    
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
             this._submitButton.setAttribute('disabled', true);
@@ -43,16 +42,14 @@ export default class FormValidator {
                 this._checkInput(inputElement);
                 this._toggleButtonState();
             });
+            this._toggleButtonState();
         });
     }
     enableValidation() {
         // this._form.addEventListener('submit', evt => evt.preventDefault());
         this._setInputListeners();
     }
-    clearValidation() {//знаю что просили один публичный метод, если нужно переделаю
-        this._inputList.forEach(inputElement => {
-            this._hideInputError(inputElement);
-        });
-        this._toggleButtonState();
-    }
+    clearValidation() {
+        this._inputList.forEach(inputElement => this._hideInputError(inputElement));
+    } 
 }
