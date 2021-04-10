@@ -1,20 +1,21 @@
 import FormValidator from '../components/FormValidator.js'
 import { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting } from '../components/config.js';
-
 import Card from '../components/Card.js';
 import { initialCards } from '../components/initial-cards.js';
 import { clickPopupListener, openPopup, closePopup } from '../components/utils.js';
 
 
-clickPopupListener();
+
+//валидация
+
+const formEditValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
+formEditValidator.enableValidation();
+const formCardValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
+formCardValidator.enableValidation();
 
 // Popup Edit ------------------------------------------------------------------
 
-//валидация
-const formEditValidator = new FormValidator(validateConfig, popupEditConfig.formEdit);
-formEditValidator.enableValidation();
-
-const editButtonHandler =() => {
+const editButtonHandler = () => {
     popupEditConfig.profileNameInput.value = popupEditConfig.profileName.textContent;
     popupEditConfig.profileCaptionInput.value = popupEditConfig.profileCaption.textContent;
     formEditValidator.clearValidation();
@@ -28,14 +29,8 @@ const editSubmitHandler = evt => {
     closePopup(popupEditConfig.popupEditProfile);
 };
 
-// шпионы
-popupEditConfig.editButton.addEventListener('click', () => {
-    editButtonHandler();
-});
-popupEditConfig.formEdit.addEventListener('submit', editSubmitHandler);
-
 // Popup Add -----------------------------------------------------------------------
-// открытие попапа картинки
+
 const handleCardClick = (name, link) => {
     popupImgSetting.popupImg.src = link; 
     popupImgSetting.popupImg.alt = name; 
@@ -43,6 +38,16 @@ const handleCardClick = (name, link) => {
     openPopup(popupImgSetting.popupPhoto);
 };
 
+const addCardSubmit = evt => {
+    evt.preventDefault();
+    addCard({
+        name: addCardConfig.cardTitleInput.value,
+        link: addCardConfig.cardSourceInput.value
+    });
+    closePopup(addCardConfig.popupAddCard);
+};
+
+//  Отрисовка карточек
 const createCard  = (item) => {
     const card = new Card(item, handleCardClick, сardSetting, '.template-card');
     const cardElement = card.generateCard();
@@ -54,8 +59,6 @@ const addCard = (item, toEnd) => {
     const method = toEnd ? 'append' : 'prepend';
     addCardConfig.photoContainer[method](cardElement);
 }
-
-//  Отрисовка карточек
 const renderList = () =>{
     initialCards.forEach(item => {
         addCard(item, true);
@@ -63,26 +66,15 @@ const renderList = () =>{
 };
 
 renderList();
-// создание новой карточки
-const addCardSubmit = evt => {
-    evt.preventDefault();
-    addCard({
-        name: addCardConfig.cardTitleInput.value,
-        link: addCardConfig.cardSourceInput.value
-    });
-    closePopup(addCardConfig.popupAddCard);
-};
 
-// валидация
+// шпионы
+clickPopupListener();
 
-const formCardValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
-formCardValidator.enableValidation();
+popupEditConfig.editButton.addEventListener('click', editButtonHandler);
+popupEditConfig.formEdit.addEventListener('submit', editSubmitHandler);
 
-// // шпионы
 addCardConfig.addButton.addEventListener('click', () => {
     addCardConfig.formAdd.reset();
-    // часть кода в прощлый раз я забыл удалить, но здесь прошу обратить внимание на то,
-    // что этот метод удаляет ошибки
     formCardValidator.clearValidation();
     openPopup(addCardConfig.popupAddCard)
 });
