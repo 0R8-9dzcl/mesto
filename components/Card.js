@@ -1,5 +1,3 @@
-import { сardSetting, popupImgSetting } from '../components/config.js';
-
 export default class Card {
     constructor(data, handleCardClick, сardSetting, cardSelector) {
         this._image = data.link;
