@@ -1,8 +1,9 @@
-import FormValidator from '../components/FormValidator.js'
-import { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting } from '../components/config.js';
+import './index.css';
+import FormValidator from '../components/FormValidator'
+import { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting } from '../utils/config.js';
 import Card from '../components/Card.js';
 import { initialCards } from '../components/initial-cards.js';
-import { clickPopupListener, openPopup, closePopup } from '../components/utils.js';
+import { clickPopupListener, openPopup, closePopup } from '../utils/utils.js';
 
 
 

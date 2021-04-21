@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Евгений Алексеев">
-    <link rel="stylesheet" href="./pages/index.css" type="text/css">
-    <link href="./images/favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="<%=require('./images/favicon.png')%>" rel="shortcut icon" type="image/x-icon">
     <title>Место</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/header-logo.svg" alt="логтип Место-Россия">
+        <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="логтип Место-Россия">
     </header>
     <main>
         <section class="profile">
             <div class="profile__container">
-                <img class="profile__avatar" src="./images/image.jpg" alt="аватарка пользлвателя">
+                <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка пользлвателя">
                 <div class="profile__info">
                     <div class="profile__user">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -77,6 +76,5 @@
             </div>
         </li>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
