@@ -2,6 +2,7 @@ import './index.css';
 import FormValidator from '../components/FormValidator'
 import { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting } from '../utils/config.js';
 import Card from '../components/Card.js';
+import Section from '../components/Section.js';
 import { initialCards } from '../components/initial-cards.js';
 import { clickPopupListener, openPopup, closePopup } from '../utils/utils.js';
 
@@ -41,10 +42,11 @@ const handleCardClick = (name, link) => {
 
 const addCardSubmit = evt => {
     evt.preventDefault();
-    addCard({
+    const cardElement = createCard({
         name: addCardConfig.cardTitleInput.value,
         link: addCardConfig.cardSourceInput.value
     });
+    renderCard.addItem(cardElement);
     closePopup(addCardConfig.popupAddCard);
 };
 
@@ -55,18 +57,17 @@ const createCard  = (item) => {
     return cardElement;
 };
 
-const addCard = (item, toEnd) => {
-    const cardElement = createCard(item);
-    const method = toEnd ? 'append' : 'prepend';
-    addCardConfig.photoContainer[method](cardElement);
-}
-const renderList = () =>{
-    initialCards.forEach(item => {
-        addCard(item, true);
-    });
-};
+const renderCard = new Section({
+    items: initialCards,
+    renderer: (item) => {
+		const cardElement = createCard(item);
+		renderCard.addItem(cardElement);
+    },
+},
+	addCardConfig.photoContainer
+);
 
-renderList();
+renderCard.renderItems();
 
 // шпионы
 clickPopupListener();
