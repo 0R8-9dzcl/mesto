@@ -28,7 +28,7 @@ const popupAdd = new PopupWithForm(addCardConfig.popupAddCard,
                 name: data.place,
                 link: data.source
             });
-            renderCard.addItem(cardElement);
+            renderCard.addItem(cardElement, 'prepend');
             popupAdd.close();
         }
     }
@@ -69,13 +69,14 @@ const createCard  = (item) => {
     return cardElement;
 };
 
-const renderCard = new Section({
-    items: initialCards,
-    renderer: (item) => {
-		const cardElement = createCard(item);
-		renderCard.addItem(cardElement);
+const renderCard = new Section(
+    {
+        items: initialCards,
+        renderer: (item) => {
+            const cardElement = createCard(item);
+            renderCard.addItem(cardElement, 'append');
+        },
     },
-},
 	addCardConfig.photoContainer
 );
 
