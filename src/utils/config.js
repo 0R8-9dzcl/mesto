@@ -12,6 +12,7 @@ const popupEditConfig = {
     editButton: document.querySelector('.profile__edit-button'),
     popupEditProfile: document.querySelector('.popup_edit-profile'),
     formEdit: document.querySelector('.popup__form_action_edit'),
+
     profileName: document.querySelector('.profile__name'),
     profileNameInput: document.querySelector('.popup__input_name_name'),
     profileCaption: document.querySelector('.profile__caption'),
@@ -38,10 +39,6 @@ const сardSetting = {
 };
 
 // Параметры папапа картинок
-const popupImgSetting = {
-    popupImg: document.querySelector('.popup__img'),
-    popupPhoto: document.querySelector('.popup_photo'),
-    popupImgCaption: document.querySelector('.popup__img-caption')
-};
+const popupPhoto = document.querySelector('.popup_photo');
 
-export { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupImgSetting };
+export { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupPhoto };

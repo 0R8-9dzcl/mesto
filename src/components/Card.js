@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({ name, link } , handleCardClick, сardSetting, cardSelector) {
+    constructor({ name, link } , { handleCardClick }, сardSetting, cardSelector) {
         this._image = link;
         this._caption = name;
         this._cardSelector = document.querySelector(cardSelector);
