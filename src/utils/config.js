@@ -22,6 +22,7 @@ const popupEditConfig = {
 // Параметры папапа добавления картинок
 const addCardConfig = {
     addButton: document.querySelector('.profile__add-button'),
+    cardTemplate: document.querySelector('.template-card'),
     popupAddCard: document.querySelector('.popup_add-card'),
     formAdd: document.querySelector('.popup__form_action_add'),
     photoContainer: document.querySelector('.cards__list'),

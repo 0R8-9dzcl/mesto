@@ -4,7 +4,7 @@ import FormValidator from '../components/FormValidator'
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage';
-import { initialCards } from '../components/initial-cards.js';
+import { initialCards } from '../utils/initial-cards.js';
 import PopupWithForm from '../components/PopupWithForm';
 import UserInfo from '../components/UserInfo';
 
@@ -64,7 +64,7 @@ const createCard  = (item) => {
                 popupImage.open({ name, link });
             }
         },
-        сardSetting, '.template-card');
+        сardSetting, addCardConfig.cardTemplate);
     const cardElement = card.generateCard();
     return cardElement;
 };
