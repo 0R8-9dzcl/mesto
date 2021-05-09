@@ -1,5 +1,6 @@
 export default class Card {
-    constructor({ name, link } , { handleCardClick }, сardSetting, cardSelector) {
+    constructor({ name, link } , { handleCardClick }, сardSetting, cardSelector, 
+        popupDelete) {
         this._image = link;
         this._caption = name;
         this._cardSelector = cardSelector;
@@ -9,6 +10,7 @@ export default class Card {
         this._cardTitle = this._card.querySelector(сardSetting.cardTitle);
         this._cardTrash = this._card.querySelector(сardSetting.trashButton);
         this._handleCardClick = handleCardClick;
+        this._openPopupDelete = popupDelete;
     }
     _getTemplate() {
         const cardElement = this._cardSelector.content.querySelector('.card').cloneNode(true);
@@ -18,7 +20,8 @@ export default class Card {
         this._cardLike.classList.toggle('card__like_active');
     }
     _handleDeleteCard() {
-        this._card.remove();
+        this._openPopupDelete();
+        // this._card.remove();
     }
     _setEventListeners() {
         this._cardPhoto.addEventListener('click', () => this._handleCardClick(this._caption, this._image));

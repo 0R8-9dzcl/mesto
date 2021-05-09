@@ -9,6 +9,9 @@
     cursor: pointer;
     transition: opacity .3s;
     outline: none;
+    position: absolute;
+    top: -20px;
+    right: 0;
 }
 
 .card__like:hover {

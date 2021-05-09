@@ -14,7 +14,9 @@
     <main>
         <section class="profile">
             <div class="profile__container">
-                <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка пользлвателя">
+                <button class="profile__avatar-edit">
+                    <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка пользлвателя">
+                </button>
                 <div class="profile__info">
                     <div class="profile__user">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -33,9 +35,20 @@
         <p class="footer__copy">&copy; 2021 Mesto Russia</p>
     </footer>
     <!-- pop-up -->
+    <div class="popup popup_upd-avatar">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <form class="popup__form popup__form_action_upd" name="updAvatar" novalidate>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <input class="popup__input popup__input_name_avatar" id="avatar-input" name="avatar" type="url" placeholder="Ссылка на картинку" required>
+                <span class="popup__error" id="avatar-input-error"></span>
+                <button class="popup__submit" type="submit" name="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <div class="popup popup_edit-profile">
         <div class="popup__container">
-            <button class="popup__close-button popup__close-button_action_edit" type="button"></button>
+            <button class="popup__close-button" type="button"></button>
             <form class="popup__form popup__form_action_edit" name="editProfile" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__input popup__input_name_name" id="name-input" name="name" type="text" placeholder="Имя пользователя" minlength="2" maxlength="40" required>
@@ -48,7 +61,7 @@
     </div>
     <div class="popup popup_add-card">
         <div class="popup__container">
-            <button class="popup__close-button popup__close-button_action_add" type="button"></button>
+            <button class="popup__close-button" type="button"></button>
             <form class="popup__form popup__form_action_add" name="addCard" novalidate>
                 <h2 class="popup__title">Новое место</h2>
                 <input class="popup__input popup__input_name_place" id="place-input" name="place" type="text" placeholder="Название" minlength="2" maxlength="30" required>
@@ -61,9 +74,18 @@
     </div>
     <div class="popup_photo popup">
         <div class="popup__photo-box">
-            <button class="popup__close-button popup__close-button_action_image" type="button"></button>
+            <button class="popup__close-button" type="button"></button>
             <img class="popup__img" src="#" alt=" ">
             <p class="popup__img-caption"></p>
+        </div>
+    </div>
+    <div class="popup popup_confirm">
+        <div class="popup__container">
+            <button class="popup__close-button" type="button"></button>
+            <form class="popup__form popup__form_action_conf" name="confirm" novalidate>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__submit popup__submit_type_confirm" type="submit" name="submit">Да</button>
+            </form>
         </div>
     </div>
     <template class="template-card">
@@ -72,7 +94,10 @@
             <img class="card__photo" src="#" alt="">
             <div class="card__caption">
                 <h2 class="card__title"></h2>
-                <button class="card__like" type="button"></button>
+                <div class="card__like-container">
+                    <button class="card__like" type="button"></button>
+                    <p class="card__like-counter">0</p>
+                </div>
             </div>
         </li>
     </template>
