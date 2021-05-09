@@ -7,6 +7,14 @@ const validateConfig = {
     errorClass: 'popup__error_active'
 };
 
+// Попап Аватара
+const popupUpdAvatar = {
+    avatarButtun: document.querySelector('.profile__avatar-edit'),
+    avatarImg: document.querySelector('.profile__avatar'),
+    popupAvatar: document.querySelector('.popup_upd-avatar'),
+    avatarForm: document.querySelector('.popup__form_action_upd'),
+}
+
 // Параметры папапа редактирования
 const popupEditConfig = {
     editButton: document.querySelector('.profile__edit-button'),
@@ -30,6 +38,10 @@ const addCardConfig = {
     cardSourceInput: document.querySelector('.popup__input_name_source')
 };
 
+const cardDeletePopup = {
+    confirmSelector: document.querySelector('.popup_confirm'),
+    deleteForm: document.querySelector('.popup__form_action_conf')
+}
 
 // Параметры карточек
 const сardSetting = {
@@ -42,4 +54,4 @@ const сardSetting = {
 // Параметры папапа картинок
 const popupPhoto = document.querySelector('.popup_photo');
 
-export { validateConfig, popupEditConfig, addCardConfig, сardSetting, popupPhoto };
+export { validateConfig, popupUpdAvatar, popupEditConfig, addCardConfig, cardDeletePopup, сardSetting, popupPhoto };
