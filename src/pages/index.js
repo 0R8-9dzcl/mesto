@@ -58,6 +58,7 @@ const popupAdd = new PopupWithForm(addCardConfig.popupAddCard,
 const popupDelete = new PopupDeleteCard(cardDeletePopup.confirmSelector, 
     {
         submitForm: (data) => {
+            
             console.log('done')
         }
     }
@@ -77,7 +78,6 @@ formCardValidator.enableValidation();
 //Avatar update  ---------
 
 const updButtonHandler = () => {
-
     formAvatarValidator.clearValidation();
     popupAvatarUpd.open();
 };
@@ -113,7 +113,6 @@ const createCard  = (item) => {
 };
 
 function openConfirmPopup() {
-    
     popupDelete.open();
 }
 
