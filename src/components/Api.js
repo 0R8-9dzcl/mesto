@@ -84,4 +84,18 @@ export default class Api{
 		})
 		.catch(err => console.log(`Сохранение аватара... Ошибка: ${err}`))
 	}
+	deleteCard(cardId) {
+		return fetch(this._url + `cards/${cardId}`, {
+			method: 'DELETE',
+			headers: this._headers
+		})
+		.then(res => {
+			if(res.ok) {
+				return res.json();
+			} else {
+				return Promise.reject(res.status);
+			}
+		})
+		.catch(err => console.log(`Удаление карточки... Ошибка: ${err}`))
+	}
 }

@@ -3,6 +3,7 @@ export default class UserInfo {
 		this._avatar = avatar;
 		this._name = name;
 		this._caption = caption;
+		this._userId = null;
 	}
 	getUserInfo() {
 		return {
@@ -10,11 +11,15 @@ export default class UserInfo {
 			caption: this._caption.textContent
 		}
 	}
-	setUserInfo(name, caption) {
+	setUserInfo(name, caption, userId) {
 		this._name.textContent = name;
 		this._caption.textContent = caption;
+		this._userId = userId;
 	}
 	setUserAvatar(avatar){
 		this._avatar.src = avatar;
+	}
+	userId() {
+		return this._userId;
 	}
 }

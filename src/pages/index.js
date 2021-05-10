@@ -17,11 +17,16 @@ const userInfo = new UserInfo(popupUpdAvatar.avatarImg, popupEditConfig.profileN
 const popupAvatarUpd = new PopupWithForm(popupUpdAvatar.popupAvatar,
     {
         submitForm: (data) => {
+            const button = popupUpdAvatar.popupAvatar.querySelector('.popup__submit');
+            button.textContent = 'Сохранение...';
             api.updAvatar(data.avatar)
             .then(result => {
                 userInfo.setUserAvatar(result.avatar);
-                popupAvatarUpd.close();
             })
+            .finally(() => {
+                popupAvatarUpd.close();
+                button.textContent = 'Сохранить';
+            });
         }
     }
 );
@@ -30,11 +35,16 @@ const popupAvatarUpd = new PopupWithForm(popupUpdAvatar.popupAvatar,
 const popupEdit = new PopupWithForm(popupEditConfig.popupEditProfile,
     {
         submitForm: (data) => {
+            const button = popupEditConfig.popupEditProfile.querySelector('.popup__submit');
+            button.textContent = 'Сохранение...';
             api.setUserInfo(data.name, data.caption)
             .then(result => {
                 userInfo.setUserInfo(result.name, result.about);
-                popupEdit.close();
             })
+            .finally(() => {
+                popupEdit.close();
+                button.textContent = 'Сохранить';
+            });
         }
     }
 );
@@ -42,24 +52,29 @@ const popupEdit = new PopupWithForm(popupEditConfig.popupEditProfile,
 const popupAdd = new PopupWithForm(addCardConfig.popupAddCard, 
     {
         submitForm: (data) => {
+            const button = addCardConfig.popupAddCard.querySelector('.popup__submit');
+            button.textContent = 'Создание...';
             api.postCards(data.place, data.source)
             .then(result => {
-                const cardElement = createCard({
-                    name: result.name,
-                    link: result.link
-                });
+                const cardElement = createCard(result);
                 renderCard.addItem(cardElement, 'prepend');
-                popupAdd.close();
             })
+            .finally(() => {
+                popupAdd.close();
+                button.textContent = 'Создать';
+            });
         }
     }
 );
 
 const popupDelete = new PopupDeleteCard(cardDeletePopup.confirmSelector, 
     {
-        submitForm: (data) => {
-            
-            console.log('done')
+        submitForm: (cardId) => {
+            api.deleteCard(popupDelete.cardId().id)
+            .then(() => {
+                popupDelete.cardId().remove();
+                popupDelete.close();
+            })
         }
     }
 );
@@ -97,6 +112,7 @@ const editButtonHandler = () => {
 
 //  Отрисовка карточек
 const createCard  = (item) => {
+    const userId = userInfo.userId();
     const card = new Card(
         item,
         {
@@ -106,14 +122,15 @@ const createCard  = (item) => {
         },
         сardSetting,
         addCardConfig.cardTemplate,
-        openConfirmPopup
+        openConfirmPopup,
+        userId
     );
     const cardElement = card.generateCard();
     return cardElement;
 };
 
-function openConfirmPopup() {
-    popupDelete.open();
+function openConfirmPopup(cardId) {
+    popupDelete.open(cardId);
 }
 
 const renderCard = new Section(
@@ -158,7 +175,7 @@ api.getCards()
 
 api.getUserInfo()
 .then(result => {
-    userInfo.setUserInfo(result.name, result.about);
+    userInfo.setUserInfo(result.name, result.about, result._id);
     userInfo.setUserAvatar(result.avatar);
 })
 .catch(err => {

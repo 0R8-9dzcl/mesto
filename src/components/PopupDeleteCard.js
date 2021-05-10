@@ -14,8 +14,11 @@ export default class PopupDeleteCard extends Popup {
 			this._submitForm();
 		});
     }
-	open() {
+	open(card) {
 		super.open();
-		
+		this._card = card;
+	}
+	cardId() {
+		return this._card;
 	}
 }
