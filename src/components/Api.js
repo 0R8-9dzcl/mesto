@@ -98,4 +98,32 @@ export default class Api{
 		})
 		.catch(err => console.log(`Удаление карточки... Ошибка: ${err}`))
 	}
+	addCardLike(cardId) {
+		return fetch(this._url + `cards/likes/${cardId}`, {
+			method: 'PUT',
+			headers: this._headers
+		})
+		.then(res => {
+			if(res.ok) {
+				return res.json();
+			} else {
+				return Promise.reject(res.status);
+			}
+		})
+		.catch(err => console.log(`Лайк карточки карточки... Ошибка: ${err}`))
+	}
+	removeCardLike(cardId) {
+		return fetch(this._url + `cards/likes/${cardId}`, {
+			method: 'DELETE',
+			headers: this._headers
+		})
+		.then(res => {
+			if(res.ok) {
+				return res.json();
+			} else {
+				return Promise.reject(res.status);
+			}
+		})
+		.catch(err => console.log(`Удаление лайка карточки... Ошибка: ${err}`))
+	}
 }

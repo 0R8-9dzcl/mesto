@@ -44,15 +44,16 @@ const cardDeletePopup = {
 }
 
 // Параметры карточек
-const сardSetting = {
+const cardSetting = {
     cardTitle: ('.card__title'),
     cardPhoto: ('.card__photo'),
     trashButton: ('.card__delete'),
     like: ('.card__like'),
+    likeActive: ('card__like_active'),
     likeCounter: ('.card__like-counter')
 };
 
 // Параметры папапа картинок
 const popupPhoto = document.querySelector('.popup_photo');
 
-export { validateConfig, popupUpdAvatar, popupEditConfig, addCardConfig, cardDeletePopup, сardSetting, popupPhoto };
+export { validateConfig, popupUpdAvatar, popupEditConfig, addCardConfig, cardDeletePopup, cardSetting, popupPhoto };
