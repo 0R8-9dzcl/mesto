@@ -48,7 +48,8 @@ const сardSetting = {
     cardTitle: ('.card__title'),
     cardPhoto: ('.card__photo'),
     trashButton: ('.card__delete'),
-    like: ('.card__like')
+    like: ('.card__like'),
+    likeCounter: ('.card__like-counter')
 };
 
 // Параметры папапа картинок
