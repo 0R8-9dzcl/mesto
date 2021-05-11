@@ -36,7 +36,7 @@ export default class Card {
         this._cardTrash.addEventListener('click', () => this._handleDeleteCard());
     }
     _activateLike() {
-        this._likes.forEach(like => {
+        this._likes.some(like => {
             if (like._id === this._userId) {
               this._cardLike.classList.add(this._cardLikeActive);
             };

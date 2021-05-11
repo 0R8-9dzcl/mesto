@@ -3,19 +3,21 @@ export default class Api{
 		this._url = selector.url;
 		this._headers = selector.headers;
 	}
+	_checkOk(res) {
+		if(res.ok) {
+			return res.json();
+		} else {
+			return Promise.reject(res.status);
+		}
+	}
 	getCards() {
 		return fetch(this._url + 'cards', {
 			method: 'GET',
 			headers: this._headers
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Загрузкка списка карточек... Ошибка: ${err}`))
 	}
 	postCards(name, link) {
 		return fetch(this._url + 'cards', {
@@ -27,13 +29,8 @@ export default class Api{
 			})
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Сохранение новой карточки... Ошибка: ${err}`))
 	}
 	getUserInfo() {
 		return fetch(this._url + 'users/me', {
@@ -41,13 +38,8 @@ export default class Api{
 			headers: this._headers
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Загрузка данных пользователя... Ошибка: ${err}`))
 	}
 	setUserInfo(name, caption) {
 		return fetch(this._url + 'users/me', {
@@ -59,13 +51,8 @@ export default class Api{
 			})
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Сохранение данных пользователя... Ошибка: ${err}`))
 	}
 	updAvatar(src) {
 		return fetch(this._url + 'users/me/avatar', {
@@ -76,13 +63,8 @@ export default class Api{
 			})
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Сохранение аватара... Ошибка: ${err}`))
 	}
 	deleteCard(cardId) {
 		return fetch(this._url + `cards/${cardId}`, {
@@ -90,13 +72,8 @@ export default class Api{
 			headers: this._headers
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Удаление карточки... Ошибка: ${err}`))
 	}
 	addCardLike(cardId) {
 		return fetch(this._url + `cards/likes/${cardId}`, {
@@ -104,13 +81,8 @@ export default class Api{
 			headers: this._headers
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Лайк карточки карточки... Ошибка: ${err}`))
 	}
 	removeCardLike(cardId) {
 		return fetch(this._url + `cards/likes/${cardId}`, {
@@ -118,12 +90,7 @@ export default class Api{
 			headers: this._headers
 		})
 		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return Promise.reject(res.status);
-			}
+			return this._checkOk(res)
 		})
-		.catch(err => console.log(`Удаление лайка карточки... Ошибка: ${err}`))
 	}
 }
