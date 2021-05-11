@@ -56,4 +56,11 @@ const cardSetting = {
 // Параметры папапа картинок
 const popupPhoto = document.querySelector('.popup_photo');
 
-export { validateConfig, popupUpdAvatar, popupEditConfig, addCardConfig, cardDeletePopup, cardSetting, popupPhoto };
+const errorConfig = {
+    alert: document.querySelector('.alert'),
+    alertVisible: 'alert_visible',
+    alertError: document.querySelector('.alert__error')
+}
+
+export { validateConfig, popupUpdAvatar, popupEditConfig, addCardConfig,
+    cardDeletePopup, cardSetting, popupPhoto, errorConfig };
