@@ -236,7 +236,7 @@ addCardConfig.addButton.addEventListener('click', () => {
 
 // ошибки 
 
-let errorTimer = function(){}; 
+let errorTimer; 
 const showApiError= (errTxt) => {
     errorConfig.alert.classList.add(errorConfig.alertVisible);
     errorTimer = setTimeout(hideApiError, 3000);
