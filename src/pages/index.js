@@ -73,7 +73,6 @@ const popupEdit = new PopupWithForm(popupEditConfig.popupEditProfile,
                 hideApiError();
             })
             .catch(err => {
-                button.textContent = 'Сохранить';
                 console.log(`Сохранение данных пользователя... Ошибка: ${err}`);
                 showApiError('Сохранение данных пользователя... Ошибка');
             })
@@ -97,7 +96,6 @@ const popupAdd = new PopupWithForm(addCardConfig.popupAddCard,
                 hideApiError();
             })
             .catch(err => {
-                button.textContent = 'Создать';
                 console.log(`Сохранение новой карточки...... Ошибка: ${err}`);
                 showApiError('Сохранение аватара... Ошибка');
             })
