@@ -50,3 +50,7 @@
 @import url("../blocks/popup/__add-card/popup__add-card.css");
 @import url("../blocks/popup/__img/popup__img.css");
 @import url("../blocks/popup/__img-caption/popup__img-caption.css");
+/* alert */
+@import url("../blocks/alert/alert.css");
+@import url("../blocks/alert/_visible/alert_visible.css");
+@import url("../blocks/alert/__error/alert__error.css");
