@@ -171,13 +171,10 @@ const createCard  = (item) => {
                 popupDelete.open(cardId);
             },
             likeToggle: (cardId) => {
-                const cardLike = cardId.querySelector(cardSetting.like);
-                const cardLikeCount = cardId.querySelector(cardSetting.likeCounter);
-                if (!cardLike.classList.contains(cardSetting.likeActive)) {
+                if (!card.isLiked()) {
                     api.addCardLike(cardId.id)
                     .then((result) => {
-                        cardLike.classList.add(cardSetting.likeActive);
-                        cardLikeCount.textContent = result.likes.length;
+                        card.setLikesInfo(result.likes);
                         hideApiError();
                     })
                     .catch(err => {
@@ -187,8 +184,7 @@ const createCard  = (item) => {
                 } else {
                     api.removeCardLike(cardId.id)
                     .then((result) => {
-                        cardLike.classList.remove(cardSetting.likeActive);
-                        cardLikeCount.textContent = result.likes.length;
+                        card.setLikesInfo(result.likes);
                         hideApiError();
                     })
                     .catch(err => {
