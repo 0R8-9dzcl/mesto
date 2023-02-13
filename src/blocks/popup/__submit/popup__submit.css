@@ -19,7 +19,18 @@
 .popup__submit:hover {
     opacity: 0.8;
 }
-
+.popup__submit:disabled {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #000000;
+    color: #000000;
+    box-sizing: border-box;
+    opacity: 0.2;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 @media screen and (max-width: 500px) {
     .popup__submit {
         margin: 18px 0 0;

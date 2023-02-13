@@ -44,7 +44,6 @@
 @import url("../blocks/popup/__error/popup__error.css");
 @import url("../blocks/popup/__error/_active/popup__error_active.css");
 @import url("../blocks/popup/__submit/popup__submit.css");
-@import url("../blocks/popup/__submit/_disable/popup__submit_disable.css");
 @import url("../blocks/popup/__submit/_type/popup__submit_type_confirm.css");
 @import url("../blocks/popup/__photo-box/popup__photo-box.css");
 @import url("../blocks/popup/__add-card/popup__add-card.css");
