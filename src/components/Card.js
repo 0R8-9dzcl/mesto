@@ -3,12 +3,12 @@ export default class Card {
     this._likes = cardData.likes;
     this._id = cardData._id;
     this._caption = cardData.name;
-    this._image = cardData.link;
+    this._link = cardData.link;
     this._ownerId = cardData.owner._id;
     this._userId = userId;
     this._cardSelector = cardSelector;
     this._card = this._getTemplate();
-    this._cardPhoto = this._card.querySelector(cardSetting.cardPhoto);
+    this._cardImage = this._card.querySelector(cardSetting.cardPhoto);
     this._cardLike = this._card.querySelector(cardSetting.like);
     this._cardLikeActive = cardSetting.likeActive;
     this._cardTitle = this._card.querySelector(cardSetting.cardTitle);
@@ -26,9 +26,9 @@ export default class Card {
   _handleLikeCard() {
     // this._cardLike.classList.toggle('card__like_active');
     if (!this.isLiked()) {
-      this._addLikeCard(this, this._card.id);
+      this._addLikeCard(this, this._id);
     } else {
-      this._removeLikeCard(this, this._card.id);
+      this._removeLikeCard(this, this._id);
     }
   }
   _handleDeleteCard() {
@@ -36,7 +36,7 @@ export default class Card {
     this._openDeleteCardPopup(this._card);
   }
   _setEventListeners() {
-    this._cardPhoto.addEventListener('click', () => this._handleCardClick(this._caption, this._image));
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._caption, this._link));
     this._cardLike.addEventListener('click', () => this._handleLikeCard());
     this._cardTrash.addEventListener('click', () => this._handleDeleteCard());
   }
@@ -62,8 +62,8 @@ export default class Card {
     };
     this._updateLikes();
     this._card.id = this._id;
-    this._cardPhoto.src = this._image;
-    this._cardPhoto.alt = this._caption;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._caption;
     this._cardTitle.textContent = this._caption;
     return this._card;
   }
