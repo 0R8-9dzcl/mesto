@@ -15,8 +15,8 @@ export default class Card {
     this._cardTrash = this._card.querySelector(cardSetting.trashButton);
     this._likeCounter = this._card.querySelector(cardSetting.likeCounter);
     this._handleCardClick = eventHandlers.handleCardClick;
-    this._addLikeCard = eventHandlers.addLikeCard;
-    this._removeLikeCard = eventHandlers.removeLikeCard;
+    this._addLikeCard = eventHandlers.addCardLike;
+    this._removeLikeCard = eventHandlers.removeCardLike;
     this._openDeleteCardPopup = eventHandlers.openDeleteCardPopup;
   }
   _getTemplate() {
