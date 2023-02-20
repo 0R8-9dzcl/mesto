@@ -4,9 +4,9 @@ export default class Section {
 		this._container = containerSelector;
 	}
 	renderItems(data) {
-		data.forEach(item => this._renderer(item));
+		data.reverse().forEach(item => this._renderer(item));
 	}
-	addItem(element, toEnd) {
-		this._container[toEnd](element);
+	addItem(element) {
+		this._container.prepend(element);
 	}
 }
