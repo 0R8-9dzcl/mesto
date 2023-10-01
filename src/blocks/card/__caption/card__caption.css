@@ -1,5 +1,6 @@
 .card__caption {
-    margin: 25px 21px 25px 21px;
+    padding: 25px 21px 25px 21px;
+    background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
