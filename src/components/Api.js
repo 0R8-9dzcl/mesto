@@ -15,9 +15,7 @@ export default class Api{
 			method: 'GET',
 			headers: this._headers
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	postCards(name, link) {
 		return fetch(this._url + 'cards', {
@@ -28,18 +26,14 @@ export default class Api{
 				link: link
 			})
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	getUserInfo() {
 		return fetch(this._url + 'users/me', {
 			method: 'GET',
 			headers: this._headers
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	setUserInfo(name, caption) {
 		return fetch(this._url + 'users/me', {
@@ -50,9 +44,7 @@ export default class Api{
                 about: caption
 			})
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	updAvatar(src) {
 		return fetch(this._url + 'users/me/avatar', {
@@ -62,35 +54,27 @@ export default class Api{
 				avatar: src
 			})
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	deleteCard(cardId) {
 		return fetch(this._url + `cards/${cardId}`, {
 			method: 'DELETE',
 			headers: this._headers
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	addCardLike(cardId) {
 		return fetch(this._url + `cards/likes/${cardId}`, {
 			method: 'PUT',
 			headers: this._headers
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 	removeCardLike(cardId) {
 		return fetch(this._url + `cards/likes/${cardId}`, {
 			method: 'DELETE',
 			headers: this._headers
 		})
-		.then(res => {
-			return this._checkOk(res)
-		})
+		.then(this._checkOk)
 	}
 }
