@@ -11,7 +11,22 @@ import PopupWithForm from '../components/PopupWithForm';
 import PopupDeleteCard from '../components/PopupDeleteCard';
 import UserInfo from '../components/UserInfo';
 import Api from '../components/Api';
+import spam from '../utils/spam.js';
 
+// ошибки 
+
+let errorTimer;
+const showApiError = (errTxt) => {
+  errorConfig.alert.classList.add(errorConfig.alertVisible);
+  errorTimer = setTimeout(hideApiError, 3000);
+  errorConfig.alertError.textContent = errTxt;
+}
+
+const hideApiError = () => {
+  errorConfig.alert.classList.remove(errorConfig.alertVisible);
+  clearTimeout(errorTimer);
+  errorConfig.alertError.textContent = '';
+}
 // Данные пользователя
 const userInfo = new UserInfo(popupUpdAvatar.avatarImg, popupEditConfig.profileName, popupEditConfig.profileCaption);
 
@@ -19,12 +34,21 @@ const userInfo = new UserInfo(popupUpdAvatar.avatarImg, popupEditConfig.profileN
 
 // api   ---------------
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-23/',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-61/',
   headers: {
-    authorization: '577b546f-6478-4029-92a1-5665bab78a44',
+    authorization: 'dd0285f4-2ea6-4188-b21f-695fee7d6f60',
     'Content-Type': 'application/json'
   }
 })
+// Токен: dd0285f4-2ea6-4188-b21f-695fee7d6f60
+// Идентификатор группы: cohort-61
+// const api = new Api({
+//   url: 'https://mesto.nomoreparties.co/v1/cohort-23/',
+//   headers: {
+//     authorization: '577b546f-6478-4029-92a1-5665bab78a44',
+//     'Content-Type': 'application/json'
+//   }
+// })
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(result => {    //попадаем сюда, когда оба промиса будут выполнены
     const [uerInfo, cardList] = result;
@@ -39,99 +63,87 @@ Promise.all([api.getUserInfo(), api.getCards()])
     showApiError('Загрузкка данных... Ошибка');
   });
 
-// попапы -------------------------------
-const popupAvatarUpd = new PopupWithForm(popupUpdAvatar.popupAvatar,
-  {
-    submitForm: (data) => {
-      const button = popupUpdAvatar.popupAvatar.querySelector('.popup__submit');
-      button.textContent = 'Сохранение...';
-      api.updAvatar(data.avatar)
-        .then(result => {
-          userInfo.setUserAvatar(result.avatar);
-          popupAvatarUpd.close();
-          hideApiError();
-        })
-        .catch(err => {
-          console.log(`Сохранение аватара... Ошибка: ${err}`);
-          showApiError('Сохранение аватара... Ошибка');
-        })
-        .finally(() => {
-          button.textContent = 'Сохранить';
-        });
-    }
-  }
-);
+// сабмиты форм ---------------------------------------------------------------------------------------------------------
+const popupAvatarUpdSubmit = ({ avatar }) => {
+  const button = popupUpdAvatar.popupAvatar.querySelector('.popup__submit');
+  button.textContent = 'Сохранение...';
+  api.updAvatar(avatar)
+    .then(result => {
+      userInfo.setUserAvatar(result.avatar);
+      popupAvatarUpd.close();
+      hideApiError();
+    })
+    .catch(err => {
+      console.log(`Сохранение аватара... Ошибка: ${err}`);
+      showApiError('Сохранение аватара... Ошибка');
+    })
+    .finally(() => {
+      button.textContent = 'Сохранить';
+    });
+}
+const popupAvatarUpd = new PopupWithForm(popupUpdAvatar.popupAvatar, popupAvatarUpdSubmit);
+
+const popupEditSubmit = (userData) => {
+  const button = popupEditConfig.popupEditProfile.querySelector('.popup__submit');
+  button.textContent = 'Сохранение...';
+  api.setUserInfo(userData.name, userData.caption)
+    .then(result => {
+      userInfo.setUserInfo(result.name, result.about);
+      popupEdit.close();
+      hideApiError();
+    })
+    .catch(err => {
+      console.log(`Сохранение данных пользователя... Ошибка: ${err}`);
+      showApiError('Сохранение данных пользователя... Ошибка');
+    })
+    .finally(() => {
+      button.textContent = 'Сохранить';
+    });
+}
+const popupAddSubmit = ({ place, source }) => {
+  const button = addCardConfig.popupAddCard.querySelector('.popup__submit');
+  button.textContent = 'Добавление...';
+  api.postCards(place, source)
+    .then(result => {
+      const cardElement = createCard(result);
+      renderCard.addItem(cardElement,);
+      popupAdd.close();
+      hideApiError();
+    })
+    .catch(err => {
+      console.log(`Сохранение новой карточки...... Ошибка: ${err}`);
+      showApiError('Сохранение новой карточки... Ошибка');
+    })
+    .finally(() => {
+      button.textContent = 'Создать';
+    });
+}
+
+const deleteCardSubmit = (deletingCard) => {
+  popupDelete.setSubmitButtonText('Удаление...');
+  api.deleteCard(deletingCard._id)
+    .then(() => {
+      deletingCard.deleteCard();
+      popupDelete.close();
+      hideApiError();
+    })
+    .catch(err => {
+      console.log(`Удаление карточки...... Ошибка: ${err}`);
+      showApiError('Удаление карточки...... Ошибка');
+    })
+    .finally(() => popupDelete.setSubmitButtonText('Да')
+    );
+}
+// попапы ------------------------------------------------------------------------------------------------
+const popupEdit = new PopupWithForm(popupEditConfig.popupEditProfile, popupEditSubmit);
+
+const popupAdd = new PopupWithForm(addCardConfig.popupAddCard, popupAddSubmit);
 
 
-const popupEdit = new PopupWithForm(popupEditConfig.popupEditProfile,
-  {
-    submitForm: (data) => {
-      const button = popupEditConfig.popupEditProfile.querySelector('.popup__submit');
-      button.textContent = 'Сохранение...';
-      api.setUserInfo(data.name, data.caption)
-        .then(result => {
-          userInfo.setUserInfo(result.name, result.about);
-          popupEdit.close();
-          hideApiError();
-        })
-        .catch(err => {
-          console.log(`Сохранение данных пользователя... Ошибка: ${err}`);
-          showApiError('Сохранение данных пользователя... Ошибка');
-        })
-        .finally(() => {
-          button.textContent = 'Сохранить';
-        });
-    }
-  }
-);
-
-const popupAdd = new PopupWithForm(addCardConfig.popupAddCard,
-  {
-    submitForm: (data) => {
-      const button = addCardConfig.popupAddCard.querySelector('.popup__submit');
-      button.textContent = 'Сохранение...';
-      api.postCards(data.place, data.source)
-        .then(result => {
-          const cardElement = createCard(result);
-          renderCard.addItem(cardElement, 'prepend');
-          popupAdd.close();
-          hideApiError();
-        })
-        .catch(err => {
-          console.log(`Сохранение новой карточки...... Ошибка: ${err}`);
-          showApiError('Сохранение аватара... Ошибка');
-        })
-        .finally(() => {
-          button.textContent = 'Создать';
-        });
-    }
-  });
-
-const popupDelete = new PopupDeleteCard(cardDeletePopup.confirmSelector,
-  {
-    submitForm: (cardId) => {
-      const button = addCardConfig.popupAddCard.querySelector('.popup__submit');
-      button.textContent = 'Удаление...';
-      api.deleteCard(popupDelete.cardId().id)
-        .then(() => {
-          popupDelete.cardId().remove();
-          popupDelete.close();
-          hideApiError();
-        })
-        .catch(err => {
-          console.log(`Удаление карточки...... Ошибка: ${err}`);
-          showApiError('Удаление карточки...... Ошибка');
-        })
-        .finally(
-          button.textContent = 'Да'
-        );
-    }
-  }
-);
-
+const popupDelete = new PopupDeleteCard(cardDeletePopup.confirmSelector, deleteCardSubmit);
 const popupImage = new PopupWithImage(popupPhoto);
 
-//валидация
+//валидация--------------------------------------------------------------
 
 const formAvatarValidator = new FormValidator(validateConfig, popupUpdAvatar.avatarForm);
 formAvatarValidator.enableValidation();
@@ -140,14 +152,14 @@ formEditValidator.enableValidation();
 const formCardValidator = new FormValidator(validateConfig, addCardConfig.formAdd);
 formCardValidator.enableValidation();
 
-//Avatar update  ---------
+//Avatar update  --------------------------------------
 
 const updButtonHandler = () => {
   formAvatarValidator.clearValidation();
   popupAvatarUpd.open();
 };
 
-// Popup Edit ------------------------------------------------------------------
+// Popup Edit -----------------------------------------------------------------------------------
 
 const editButtonHandler = () => {
   const profileData = userInfo.getUserInfo()
@@ -168,19 +180,17 @@ const openDeleteCardPopup = (card) => {
 const addCardLike = (card, cardId) => {
   api.addCardLike(cardId)
     .then((result) => {
-      console.log('+');
       card.setLikesInfo(result.likes);
       hideApiError();
     })
     .catch(err => {
       console.log(`Лайк карточки...... Ошибка: ${err}`);
-      showApiError('Сохранение аватара... Ошибка');
+      showApiError('Лайк карточки... Ошибка');
     });
 }
 const removeCardLike = (card, cardId) => {
   api.removeCardLike(cardId)
     .then((result) => {
-      console.log('-');
       card.setLikesInfo(result.likes);
       hideApiError();
     })
@@ -196,7 +206,7 @@ const createCard = (item) => {
   const card = new Card(
     item, { handleCardClick, addCardLike, removeCardLike, openDeleteCardPopup },
     cardSetting,
-    addCardConfig.cardTemplate,
+    addCardConfig.cardTemplateSelector,
     userId
   );
   const cardElement = card.generateCard();
@@ -208,7 +218,7 @@ const renderCard = new Section(
   {
     renderer: (item) => {
       const cardElement = createCard(item);
-      renderCard.addItem(cardElement, 'append');
+      renderCard.addItem(cardElement);
     },
   },
   addCardConfig.photoContainer
@@ -230,18 +240,3 @@ addCardConfig.addButton.addEventListener('click', () => {
   popupAdd.open();
 
 });
-
-// ошибки 
-
-let errorTimer;
-const showApiError = (errTxt) => {
-  errorConfig.alert.classList.add(errorConfig.alertVisible);
-  errorTimer = setTimeout(hideApiError, 3000);
-  errorConfig.alertError.textContent = errTxt;
-}
-
-const hideApiError = () => {
-  errorConfig.alert.classList.remove(errorConfig.alertVisible);
-  clearTimeout(errorTimer);
-  errorConfig.alertError.textContent = '';
-}
